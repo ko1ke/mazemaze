@@ -1,0 +1,21 @@
+
+<div class="row">
+  <h1>インプット</h1>
+  <div class="col-md-10 col-md-offset-1">
+      <%= form_for(@parser, url: {action: 'output'}) do |f| %>
+      <%= render 'shared/error_messages' %>
+
+      <%= f.label :txt, "テキスト" %>
+      <%= f.text_area :txt, class: 'form-control' %>
+
+      <%= f.label :input_type, "解析方法を選択" %>
+      -      <%= f.select :input_type, {PLAIN: 'plain', Markup: 'markup', URL: 'url'},{}, {class:"form-control form-control-lg"} %>
+
+
+      <%= f.submit "解析", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
+
+
+

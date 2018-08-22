@@ -1,0 +1,21 @@
+<div class="row">
+  <h1>コンタクト</h1>
+  <div class="col-md-6 col-md-offset-3">
+    <h2>メール送信（サンプル、自分宛てに送信）</h2>
+    <%= form_tag send_email_path do %>
+      <%= label_tag :email, 'Eメール' %>
+      <%= text_field_tag 'email', nil, class: 'form-control' %>
+      
+      <%= label_tag :subject, '件名' %>
+      <%= text_field_tag 'subject', nil, class: 'form-control' %>
+
+      <%= label_tag :body, '本文（最大500文字）' %>
+      <%= text_area_tag 'body', nil, class: 'form-control', :maxlength => "500"%>
+
+      <%= recaptcha_tags %>
+      <br>
+
+      <%= submit_tag "送信",  class: 'btn btn-primary'%>
+    <% end %>
+  </div>
+</div>

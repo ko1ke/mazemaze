@@ -1,0 +1,1 @@
+sudo echo "dicdir = /app/.linuxbrew/lib/mecab/dic/mecab-ipadic-neologd" > /app/.linuxbrew/etc/mecabrc

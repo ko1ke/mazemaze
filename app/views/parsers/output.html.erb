@@ -1,0 +1,81 @@
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+
+    <h1>アウトプット</h1>
+    <h2>インプット（タイプ：<%= @parser.input_type %>）</h2>
+    <p><%= @parser.txt %></p>
+    <h2>解析結果</h2>
+
+    <%= form_tag('/output', method: 'get') do %>
+      <div class="input-group input-group-lg">
+
+
+        <span class="input-group-btn">
+          <%= link_to 'クリア', output_path, class: 'btn btn-warning btn-lg' %>
+        </span>
+        <%= label_tag :word_key, nil, class: "sr-only" %>
+
+        <%= text_field_tag :word_key, nil, placeholder: "表層形 or 品詞で検索", class: 'form-control input-lg' %>
+        <span class="input-group-btn">
+          <%= submit_tag '検索', class: 'btn btn-primary btn-lg' %>
+        </span>
+      </div>
+
+
+    <% end %>
+
+
+    <table class="table table-condensed table-responsive">
+      <thead>
+      <tr class="active">
+        <th>表層形</th>
+        <th>品詞</th>
+        <th>品詞細分類1</th>
+        <th>品詞細分類2</th>
+        <th>品詞細分類3</th>
+        <th>活用型</th>
+        <th>活用形</th>
+        <th>原形</th>
+        <th>読み</th>
+        <th>発音</th>
+      </tr>
+      </thead>
+      <tbody>
+
+      <% @results.each do |result| %>
+        <tr>
+          <td><%= result.surface %></td>
+          <td><%= result.part_of_speech %></td>
+          <td><%= result.part_division1 %></td>
+          <td><%= result.part_division2 %></td>
+          <td><%= result.part_division3 %></td>
+          <td><%= result.type_of_conjugation %></td>
+          <td><%= result.form_of_conjugation %></td>
+          <td><%= result.model %></td>
+          <td><%= result.yomi %></td>
+          <td><%= result.pronunciation %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+    <%= paginate @results %>
+
+    <hr>
+    <figure class="figure">
+      <figcaption class="figure-caption">品詞の構成</figcaption>
+      <%= pie_chart @pie_chart_data, height: '300px', width: '100%' %>
+    </figure>
+
+    <hr>
+    <figure class="figure">
+      <figcaption class="figure-caption">頻出単語トップ10</figcaption>
+      <%= bar_chart @bar_chart_data, height: '300px', width: '100%' %>
+    </figure>
+
+    <br>
+    <hr>
+    <%= link_to "CSVをダウンロード", csv_out_path, class: "btn btn-primary" %>
+  </div>
+
+</div>
